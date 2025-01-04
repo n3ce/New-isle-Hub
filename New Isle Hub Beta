@@ -6,13 +6,13 @@
    --main
    local Window = OrionLib:MakeWindow({Name = "Isle HUB Beta", HidePremium = false, SaveConfig = true, ConfigFolder = "Isle 10 HUB"})
 
-   local VisualTab = Window:MakeTab({
-   Name = "Visual",
+   local TPTab = Window:MakeTab({
+   Name = "Teleport",
    Icon = "rbxassetid://4483345998",
    PremiumOnly = false
    })
-   local TPTab = Window:MakeTab({
-    Name = "Teleport",
+   local VisualTab = Window:MakeTab({
+    Name = "Visual",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
     })
