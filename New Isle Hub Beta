@@ -5,40 +5,78 @@
 
    --main
    local Window = OrionLib:MakeWindow({Name = "Isle HUB Beta", HidePremium = false, SaveConfig = true, ConfigFolder = "Isle 10 HUB"})
-
-   local TPTab = Window:MakeTab({
-   Name = "Teleport",
+   --tabs
+   local VisualTab = Window:MakeTab({
+   Name = "Visual",
    Icon = "rbxassetid://4483345998",
    PremiumOnly = false
    })
-   local VisualTab = Window:MakeTab({
-    Name = "Visual",
+   local TPTab = Window:MakeTab({
+    Name = "Teleport",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
     })
     local Section = TPTab:AddSection({
-        Name = "TP"
+    Name = "TP"
+    })
+    local MiscTab = Window:MakeTab({
+    Name = "Misc",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+    })
+    local OthersTab = Window:MakeTab({
+        Name = "Others",
+        Icon = "rbxassetid://4483345998",
+        PremiumOnly = false
         })
-        local MiscTab = Window:MakeTab({
-            Name = "Misc",
-            Icon = "rbxassetid://4483345998",
-            PremiumOnly = false
-            })
-            local Section = MiscTab:AddSection({
-                Name = "Misc"
-                })
-
-                MiscTab:AddParagraph("infiniteYield","use infinite yield to fly (-fly (speed) ), use noclip (-noclip )and others things")
-
-   local Section = VisualTab:AddSection({
-   Name = "Visual"
+    --scripts
+    local Section = MiscTab:AddSection({
+    Name = "Misc"
+    })
+   local Section = OthersTab:AddSection({
+   Name = "Others"
    })
-   MiscTab:AddButton({
+   OthersTab:AddParagraph("infiniteYield","use infinite yield to fly (-fly (speed) ), use noclip (-noclip )and other things")
+   OthersTab:AddButton({
 	Name = "infiniteyield",
 	Callback = function()
         loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
   	end    
 })
+MiscTab:AddSlider({
+    Name = "WalkSpeed",
+    Min = 0,
+    Max = 200,
+    Default = 16,
+    Color = Color3.fromRGB(255, 255, 255),
+    Increment = 1,
+    ValueName = "walkspeed",
+    Callback = function(Value)
+        local player = game.Players.LocalPlayer
+        if player and player.Character and player.Character:FindFirstChild("Humanoid") then
+            local humanoid = player.Character.Humanoid
+            humanoid.WalkSpeed = Value
+            print("WalkSpeed ajustado para:", Value)
+        end
+    end    
+})
+MiscTab:AddSlider({ 
+	Name = "Jump Power", 
+	Min = 0,
+	Max = 200, 
+	Default = 50,
+	Color = Color3.fromRGB(255, 255, 255),
+	Increment = 1,
+	ValueName = "jump power", 
+	Callback = function(Value)
+		local player = game.Players.LocalPlayer
+		if player and player.Character and player.Character:FindFirstChild("Humanoid") then
+			local humanoid = player.Character:FindFirstChild("Humanoid")
+			humanoid.JumpPower = Value
+		end
+	end    
+})
+
 
 VisualTab:AddButton({
    Name = "Artifact C (If nothing appears in your location, click again)",
