@@ -28,7 +28,7 @@
                 Name = "Misc"
                 })
 
-                MiscTab:AddParagraph("infiniteYield","use infinite yield to fly (-fly (speed) ), use noclip (-noclip )and other things")
+                MiscTab:AddParagraph("infiniteYield","use infinite yield to fly (-fly (speed) ), use noclip (-noclip )and others things")
 
    local Section = VisualTab:AddSection({
    Name = "Visual"
