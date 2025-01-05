@@ -36,6 +36,7 @@
    local Section = OthersTab:AddSection({
    Name = "Others"
    })
+   MiscTab:AddParagraph("Warning","Don't be too fast or you'll get kicked")
    OthersTab:AddParagraph("infiniteYield","use infinite yield to fly (-fly (speed) ), use noclip (-noclip )and other things")
    OthersTab:AddButton({
 	Name = "infiniteyield",
@@ -86,6 +87,28 @@ VisualTab:AddButton({
        BoolValue.Parent = game.Players.LocalPlayer.Character
    end  -- Fecha o Callback aqui
 }) -- Fecha o AddButton aqui
+VisualTab:AddButton({
+    Name = "always day",
+    Callback = function()
+-- Obter a referência ao Lighting
+local lighting = game:GetService("Lighting")
+
+-- Configurar o horário fixo (ex: 14 = 14:00)
+local fixedTime = 14
+
+-- Desativar mudanças automáticas no ciclo de tempo
+lighting.ClockTime = fixedTime
+lighting.TimeOfDay = string.format("%02d:00:00", fixedTime)
+lighting.GeographicLatitude = 0 -- Mantém o Sol fixo
+lighting.Brightness = 2 -- Ajustar a iluminação conforme necessário
+
+-- Bloquear alterações no ClockTime
+lighting:GetPropertyChangedSignal("ClockTime"):Connect(function()
+    lighting.ClockTime = fixedTime
+end)
+
+    end  -- Fecha o Callback aqui
+ }) -- Fecha o AddButton aqui
 
 TPTab:AddButton({
 	Name = "Teleport Energy",
