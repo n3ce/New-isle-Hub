@@ -1,4 +1,49 @@
-   --load
+-- Carregar a Orion Library
+local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
+
+-- Defina a sua chave válida aqui
+local ValidKey = "KEY_76cfedcb"
+
+-- Função para verificar a chave
+local function checkKey(inputKey)
+    return inputKey == ValidKey
+end
+
+-- Criação da Janela Principal
+local Window = OrionLib:MakeWindow({Name = "Key System", HidePremium = false, SaveConfig = false})
+
+-- Adicionando a aba de Key
+local KeyTab = Window:MakeTab({
+    Name = "Key",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+-- Variável para armazenar a chave inserida
+local UserKey = ""
+
+-- Adicionar a seção de Key
+KeyTab:AddTextbox({
+    Name = "Enter your key",
+    Default = "",
+    TextDisappear = true,
+    Callback = function(value)
+        UserKey = value
+    end
+})
+
+-- Botão para verificar a Key
+KeyTab:AddButton({
+    Name = "Check Key",
+    Callback = function()
+        if checkKey(UserKey) then
+            OrionLib:MakeNotification({
+                Name = "Success",
+                Content = "Key valid! Running the script...",
+                Image = "rbxassetid://4483345998",
+                Time = 5
+            })
+               --load
    local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
 
@@ -47,7 +92,7 @@
 MiscTab:AddSlider({
     Name = "WalkSpeed",
     Min = 0,
-    Max = 200,
+    Max = 50,
     Default = 16,
     Color = Color3.fromRGB(255, 255, 255),
     Increment = 1,
@@ -64,7 +109,7 @@ MiscTab:AddSlider({
 MiscTab:AddSlider({ 
 	Name = "Jump Power", 
 	Min = 0,
-	Max = 200, 
+	Max = 150, 
 	Default = 50,
 	Color = Color3.fromRGB(255, 255, 255),
 	Increment = 1,
@@ -409,3 +454,30 @@ TPTab:AddButton({
         teleportPlayer()
   	end    
 })
+        else
+            OrionLib:MakeNotification({
+                Name = "Erro",
+                Content = "Invalid key! Please try again.",
+                Image = "rbxassetid://4483345998",
+                Time = 5
+            })
+        end
+    end
+})
+
+-- Botão para copiar a Key para o clipboard
+KeyTab:AddButton({
+    Name = "Get Key",
+    Callback = function()
+        setclipboard("https://link-target.net/1195190/get-key-for-isle-hub")
+        OrionLib:MakeNotification({
+            Name = "Key System",
+            Content = "Copied",
+            Image = "rbxassetid://4483345998",
+            Time = 5
+        })
+    end
+})
+
+-- Inicializar a UI
+OrionLib:Init()
